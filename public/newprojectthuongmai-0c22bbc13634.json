@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "newprojectthuongmai",
+  "private_key_id": "0c22bbc13634eccdf48581047206a71f8fd83422",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCFzFUrP9YXJcur\ni+6NRkcP72Wt3BTbZVKjXvyGNAwSzi+HwZZhHaLvvTsBg5qBcvrGxhjnVXXQuIEl\nJdaQbeuAF7wQkFz366lt/lT/xj33DIqwvJI1jj0UdBO6k2B7rmGmOeffe8WDsaQw\n8OvLrH70LMRakKEo9hDU9Ux+QmfqgKUPPm/SlA+PdEyQvTNL4o3ixOEK4yhrLtHU\nXc1+MsEBkIh0rUyphBqwPxJO+vzCN8Dip+rotMgLLG6FbQrZeS/OFbRcFh//i4hR\nX3TXDqxEnhSqYVNWaRtzb4Ul87syBeKsDwbEw7FNOVopFq9MHGtTXNeeTC5la85j\nHSe/yGqPAgMBAAECggEALAA5KBp7vSwMUVOY9XPdrdNkZGtCnq4xIZH8yOO37r1I\n60PSQQjeiyn3jDVr69NUvmbqTLWRo7zxl7ZcXC4R6xOjIO1g7ZVeKFKiQGVA/oxs\n1deF27/1vVK5JDwQWExOR7y2UQwitf8HCKNKYDZPn9xTDJeQsGhPu8EZ0VHkW71O\nDLYLyczRMKgYr102OzkGFZaucAZob1nW67Cr8AiQaEDR3Vt7QUsYTb6HKW131e8G\nA5Lt3nFpROfVKY78XapOaXylQC5DdOYVPQb4p7ZH1e0H+kw1pI2WRRUHR2wL9r5+\nACdCMnTu8dJXxcEG+ugEqXaLk1UVTUrKAHmlGe2LBQKBgQC79Pxc5KYUdwQ1Ngpl\nclQofrDuNsR1u2rKK8Wuc26sp5vG9FguZhBIWQDPwk8rAQ7pokppxM6svZg0zrYf\nneHiFMHUuT++nuagQMqd8tJW69pQ/RsK3HTnpFHBLMWv4VX49+GDddCLbYHCuX+f\nFc9Uiqfcu9levdUhstmem4EiAwKBgQC2PCaYIX2afH0R3fyl+GZ5+uUz1ZOpLl6q\nf9DoiBckkquy8VditQBuktxZ170IiXKUdFmRTT4kxySVZSialeKlCRHY2AzyNzCH\nyuEEQd1TrOjreFgVPNVEr4X0bh1YWi2dVSmtmOycPB/WY1QWK3HWsNFhOgRWpjcw\no0YEbaKVhQKBgFHPquEMLTYPL+exZAkQII2Xx4+Iiy7rqung76SlXfEM64NH6/IW\nPtQe2XmVDDyds04Cc/1hysvpooypxSAx6pYrjsr270YbiCsMyKTDgsaO1nIWGWU6\n3C/PmD5LLKkHnhJGYwSDjYiC285US7aFGb+ksrgjk9PnMRP/8zVUXnrdAoGAcyHr\njD/UeA7ggbJLFZyrObOerTHpWYC3RGb+WHrqjCuyGJrLh8wtGq7kUkqv3j3gSxR7\nJga0FU5PuacwkQHTMEtboDFXdIwTuCcgJK1sJJpgiav9kmVdpEh0jCoplhFbMkSE\n0W2FR2vg/XTBwkPuZyJNFm0uIoRe5/avnMqbZnUCgYEAth46HI63VJRSg419xiew\nTDJBnjZAatTyiqm3NlGgEbbjSmlcH89/074WLgM0aKmuzpgVoRcKlpiVQwc3jOtZ\na/ySt37cfKIu1pKJE3wuOXG10Rx0dbN2JZSeVn1e4nqAmSl0DARzf1w4HowFgMFs\nVbspEqWU90whyiTvgNZXzgw=\n-----END PRIVATE KEY-----\n",
+  "client_email": "newprojectthuongmai@newprojectthuongmai.iam.gserviceaccount.com",
+  "client_id": "107758893679107542779",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/newprojectthuongmai%40newprojectthuongmai.iam.gserviceaccount.com"
+}
