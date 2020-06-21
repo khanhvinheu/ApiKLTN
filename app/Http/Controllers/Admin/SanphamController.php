@@ -104,9 +104,9 @@ class SanphamController extends Controller
             }
             $Hinh;
             $oldname=$sanpham->Hinh;
-            if($request->hasFile('Hinh'))
+            if($request->hasFile('hinhAnh'))
             {
-                $file=$request->file('Hinh');
+                $file=$request->file('hinhAnh');
                 $duoi=$file->getClientOriginalExtension();
                 if($duoi != 'jpg' && $duoi !='png' && $duoi != 'jpeg')
                 {
@@ -120,9 +120,9 @@ class SanphamController extends Controller
                 }
                 $file->move("upload/sanpham",$name);
                 
-                if($path){
+                // if($path){
                     $sanpham->update($request->only('tenSanpham','gia','soLuong','moTa','thongTin','idNhacungcap','idDanhMuc','idKhuyenmai')+['hinhAnh'=>$name]);
-                }
+                // }
             }
             else{
                 $sanpham->update($request->all());
