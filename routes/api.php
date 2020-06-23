@@ -58,6 +58,7 @@ Route::prefix('user')->namespace('API')->group(function () {
     Route::post('create-rating', 'ProductDetailController@createRating');
     Route::post('delete-rating', 'ProductDetailController@deleteRating');
     // Route::post('khuyenmai-refer-detail', 'Api\KhuyenMaiController@referDetail');
+    Route::post('submit-order','OderController@submitOrder');
     //Danhgia
     Route::resource('danhgia', 'DanhGiaController');
     //Edit profile

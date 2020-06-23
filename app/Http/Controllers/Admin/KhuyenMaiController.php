@@ -70,7 +70,7 @@ class KhuyenMaiController extends Controller
     {
         try {
             $item=tbl_khuyenmai::find($id);
-            $item->update($request->only('tieuDe','noiDungKm'));
+            $item->update($request->only('tieuDe','chietKhau','noiDungKm'));
             $query = '
             SELECT tbl_khuyenmais.*
             FROM tbl_khuyenmais

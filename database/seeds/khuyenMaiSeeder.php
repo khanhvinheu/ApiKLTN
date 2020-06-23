@@ -15,9 +15,9 @@ class khuyenMaiSeeder extends Seeder
     	DB::table('tbl_khuyenmais')->truncate();
 
       $danhmucs = [
-        ["id"=>"1","tieuDe"=>"KM 10%","noiDungKm"=>'Khuyen mai 10%',"created_at"=>"2019-04-29 03:32:54","updated_at"=>"2019-09-06 00:56:02"],
-        ["id"=>"2","tieuDe"=>"KM 20%","noiDungKm"=>'Khuyen mai 20%',"created_at"=>"2019-04-29 03:32:54","updated_at"=>"2019-09-06 00:51:39"],
-        ["id"=>"3","tieuDe"=>"KM 30%","noiDungKm"=>'Khuyen mai 30%',"created_at"=>"2019-04-29 03:32:54","updated_at"=>"2019-09-06 00:53:01"],      
+        ["id"=>"1","tieuDe"=>"KM 10%","chietKhau"=>"10","noiDungKm"=>'Khuyen mai 10%',"created_at"=>"2019-04-29 03:32:54","updated_at"=>"2019-09-06 00:56:02"],
+        ["id"=>"2","tieuDe"=>"KM 20%","chietKhau"=>"20","noiDungKm"=>'Khuyen mai 20%',"created_at"=>"2019-04-29 03:32:54","updated_at"=>"2019-09-06 00:51:39"],
+        ["id"=>"3","tieuDe"=>"KM 30%","chietKhau"=>"23","noiDungKm"=>'Khuyen mai 30%',"created_at"=>"2019-04-29 03:32:54","updated_at"=>"2019-09-06 00:53:01"],      
 
       ];
 

@@ -15,11 +15,16 @@ class CreateTblChitietdonhangs extends Migration
     {
         Schema::create('tbl_chitietdonhangs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('idSanPham')->unsigned();
+            $table->bigInteger('idSanPham')->unsigned();            
             $table->foreign('idSanPham')->references('id')->on('tbl_sanphams')->onDelete('cascade');
             $table->bigInteger('idDonHang')->unsigned();
             $table->foreign('idDonHang')->references('id')->on('tbl_donhangs')->onDelete('cascade');
-            $table->bigInteger('soLuong')->nullable();            
+            $table->bigInteger('soLuong')->nullable(); 
+            //
+            $table->double('donGia')->default(0);
+            $table->double('chietKhau')->default(0);
+            $table->double('thanhTien')->default(0);  
+            //         
             $table->timestamps();
         });
     }

@@ -15,6 +15,17 @@ class CreateTblDonhangs extends Migration
     {
         Schema::create('tbl_donhangs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            //
+            $table->string('NguoiNhan');
+            $table->string('DiaChi');
+            $table->string('DienThoai');
+            $table->double('tongTien')->default(0);
+            $table->double('phiShip')->default(0);
+            $table->double('tongtientra')->default(0);
+            $table->string('LiDo')->nullable();
+            //$table->bigInteger('idDiaDiem')->nullable();
+            //
+            //$table->string('diaChinhanhang')->nullable();
             $table->bigInteger('idTaiKhoan')->unsigned();
             $table->foreign('idTaiKhoan')->references('id')->on('tbl_taikhoans')->onDelete('cascade');
             $table->bigInteger('idPhuongthucTT')->unsigned();

@@ -22,16 +22,24 @@ class SanphamController extends Controller
             tbl_sanphams.* , tbl_danhmucs."tenDanhmuc" , 
             tbl_nhacungcaps."tenNhacungcap" ,
             tbl_nhacungcaps."diaChi" ,
-            AVG(tbl_danhgias."Diem") as rating         
+            AVG(tbl_danhgias."Diem") as rating ,
+            tbl_khuyenmais."tieuDe"        
             FROM tbl_sanphams   
             LEFT JOIN tbl_danhmucs
             ON tbl_sanphams."idDanhMuc" = tbl_danhmucs."id"     
             LEFT JOIN tbl_nhacungcaps
             ON tbl_sanphams."idNhacungcap" = tbl_nhacungcaps."id"  
             LEFT JOIN tbl_danhgias
-            ON tbl_sanphams."id" = tbl_danhgias."idSanPham"    
-            GROUP BY (tbl_sanphams.id,tbl_danhmucs."tenDanhmuc",tbl_nhacungcaps."tenNhacungcap" ,tbl_nhacungcaps."diaChi" )
-
+            ON tbl_sanphams."id" = tbl_danhgias."idSanPham"  
+            LEFT JOIN tbl_chitietkhuyenmais
+            ON tbl_sanphams."idKhuyenmai" = tbl_chitietkhuyenmais."id" 
+            LEFT JOIN tbl_khuyenmais
+            ON tbl_khuyenmais."id" = tbl_chitietkhuyenmais."idKhuyenMai"
+            GROUP BY (tbl_sanphams.id,tbl_danhmucs."tenDanhmuc",
+                      tbl_nhacungcaps."tenNhacungcap" ,
+                      tbl_nhacungcaps."diaChi",
+                      tbl_chitietkhuyenmais."idKhuyenMai",
+                      tbl_khuyenmais."tieuDe" )
             ';           
             $data=DB::select($query);           
             $result = array(
@@ -121,6 +129,11 @@ class SanphamController extends Controller
                 $file->move("upload/sanpham",$name);
                 
                 // if($path){
+                    $img = Image::make(public_path("upload/sanpham/".$name))->resize(900,900);
+                    /* insert watermark at bottom-right corner with 10px offset */
+                    $img->insert(public_path('upload/other/logowt.png'), 'bottom-right', 15, 15,'width:20px');
+                    // $img->save(public_path("upload/other/wwabc.png"));
+                    $img->save(public_path("upload/sanpham/".$name));
                     $sanpham->update($request->only('tenSanpham','gia','soLuong','moTa','thongTin','idNhacungcap','idDanhMuc','idKhuyenmai')+['hinhAnh'=>$name]);
                 // }
             }

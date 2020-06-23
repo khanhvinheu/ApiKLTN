@@ -16,6 +16,9 @@ class CreateTblKhuyenmais extends Migration
         Schema::create('tbl_khuyenmais', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('tieuDe');
+            //new
+            $table->double('chietKhau')->default(0);
+            //
             $table->string('noiDungKm');
             $table->timestamps();
             
