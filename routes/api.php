@@ -68,6 +68,13 @@ Route::prefix('user')->namespace('API')->group(function () {
     Route::post('reset_password','ResetPasswordController@sendMail');
     Route::get('password_reset','ResetPasswordController@index');
     Route::post('password_reset/reset','ResetPasswordController@reset_pass');
+    //Donhang
+    Route::resource('trangthai', 'TrangThaiController');  
+    Route::get('get_array_top','BaoCaoController@get_array_top');
+    Route::post('baocao_donhang','BaoCaoController@baocao_donhang');
+    Route::post('donhang-refer-detail', 'ChiTietDonHangController@referDetail');
+    Route::post('donhang-filter','DonHangController@filterByIdTrangThai');
+    Route::resource('donhang', 'DonHangController');
     //Taikhoan
     Route::post('/signup', 'AuthController@register'); 
     Route::post('/login', 'AuthController@login');
