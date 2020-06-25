@@ -39,17 +39,17 @@ class DonHangController extends Controller
     public function filterByIdTrangThai(Request $request)
     {
         $query = '
-        SELECT hoa_don_xuats.*
+        SELECT tbl_donhangs.*
         ,   users."Ten" AS "UserName"
-        ,   SUM(chi_tiet_hoa_don_xuats."SoLuong" * chi_tiet_hoa_don_xuats."DonGia") AS "total"
-        FROM hoa_don_xuats
+        ,   SUM(tbl_chitietdonhangs."SoLuong" * tbl_chitietdonhangs."DonGia") AS "total"
+        FROM tbl_donhangs
         LEFT JOIN users
-        ON users."id" = hoa_don_xuats."idUser"
-        LEFT JOIN chi_tiet_hoa_don_xuats
-        ON chi_tiet_hoa_don_xuats."idHDX" = hoa_don_xuats."id"
-        GROUP BY hoa_don_xuats."id"
+        ON users."id" = tbl_donhangs."idUser"
+        LEFT JOIN tbl_chitietdonhangs
+        ON tbl_chitietdonhangs."idHDX" = tbl_donhangs."id"
+        GROUP BY tbl_donhangs."id"
         ,   users."Ten"   
-        HAVING hoa_don_xuats."idTrangThai" = '.$request['idTrangThai'];
+        HAVING tbl_donhangs."idTrangThai" = '.$request['idTrangThai'];
         $items = DB::select($query);
         $result = array(
             'status' => 'OK',
@@ -122,40 +122,31 @@ class DonHangController extends Controller
     public function show($id)
     {
         $query1 = "
-        SELECT hoa_don_xuats.*  
-        ,   users.\"Ten\" AS \"UserName\"
-        ,   SUM(chi_tiet_hoa_don_xuats.\"SoLuong\" * chi_tiet_hoa_don_xuats.\"DonGia\") AS \"total\"
-        ,  CONCAT(p.\"Ten\", ', ' ,q.\"Ten\",', ',tp.\"Ten\") AS \"DiaDiem\"
-        FROM hoa_don_xuats
-        LEFT JOIN users
-        ON users.\"id\" = hoa_don_xuats.\"idUser\"
-        LEFT JOIN chi_tiet_hoa_don_xuats
-        ON chi_tiet_hoa_don_xuats.\"idHDX\" = hoa_don_xuats.\"id\"
-        LEFT JOIN dia_diems p
-        ON p.\"id\" = hoa_don_xuats.\"idDiaDiem\"
-        LEFT JOIN dia_diems q 
-        ON q.\"id\" = p.\"idParent\"
-        LEFT JOIN dia_diems tp 
-        ON tp.\"id\" = q.\"idParent\"
-        GROUP BY hoa_don_xuats.\"id\"         
-        ,   users.\"Ten\"
-        ,   p.\"Ten\"
-        ,   q.\"Ten\"
-        ,   tp.\"Ten\" 
-        HAVING hoa_don_xuats.\"id\" =  $id";
+        SELECT tbl_donhangs.*  
+        ,   tbl_taikhoans.\"hoTen\" AS \"UserName\"
+        ,   SUM(tbl_chitietdonhangs.\"soLuong\" * tbl_chitietdonhangs.\"donGia\") AS \"total\"       
+        FROM tbl_donhangs
+        LEFT JOIN tbl_taikhoans
+        ON tbl_taikhoans.\"id\" = tbl_donhangs.\"idTaiKhoan\"
+        LEFT JOIN tbl_chitietdonhangs
+        ON tbl_chitietdonhangs.\"idDonHang\" = tbl_donhangs.\"id\"       
+        GROUP BY tbl_donhangs.\"id\"         
+        ,   tbl_taikhoans.\"hoTen\"
+       
+        HAVING tbl_donhangs.\"id\" =  $id";
         $data_find1 = DB::select($query1);
         //
         $query2 = "
-        SELECT chi_tiet_hoa_don_xuats.*
-        ,   san_pham_ban_muas.\"TenSanPham\"
-        ,   san_pham_ban_muas.\"Hinh\"
-        FROM chi_tiet_hoa_don_xuats
-        LEFT JOIN san_pham_ban_muas
-        ON san_pham_ban_muas.\"id\" = chi_tiet_hoa_don_xuats.\"idSanPham\"
-        INNER JOIN hoa_don_xuats
-        ON hoa_don_xuats.\"id\" = chi_tiet_hoa_don_xuats.\"idHDX\"
-        AND hoa_don_xuats.\"id\" = $id
-        ORDER BY chi_tiet_hoa_don_xuats.\"id\" ASC
+        SELECT tbl_chitietdonhangs.*
+        ,   tbl_sanphams.\"tenSanpham\"
+        ,   tbl_sanphams.\"hinhAnh\"
+        FROM tbl_chitietdonhangs
+        LEFT JOIN tbl_sanphams
+        ON tbl_sanphams.\"id\" = tbl_chitietdonhangs.\"idSanPham\"
+        INNER JOIN tbl_donhangs
+        ON tbl_donhangs.\"id\" = tbl_chitietdonhangs.\"idDonHang\"
+        AND tbl_donhangs.\"id\" = $id
+        ORDER BY tbl_chitietdonhangs.\"id\" ASC
         ";
         $data_find2 = DB::select($query2);
         //

@@ -75,6 +75,11 @@ Route::prefix('user')->namespace('API')->group(function () {
     Route::post('donhang-refer-detail', 'ChiTietDonHangController@referDetail');
     Route::post('donhang-filter','DonHangController@filterByIdTrangThai');
     Route::resource('donhang', 'DonHangController');
+    //Thanhtoan
+    Route::post('thanhtoan','PaymentController@create');
+    Route::get('return-vnpay','PaymentController@return');
+    
+
     //Taikhoan
     Route::post('/signup', 'AuthController@register'); 
     Route::post('/login', 'AuthController@login');

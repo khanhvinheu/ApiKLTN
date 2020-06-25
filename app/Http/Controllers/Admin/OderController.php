@@ -42,16 +42,19 @@ class OderController extends Controller
 					LIMIT 1
 					';
                     $result= DB::select($query)[0];
-                    $dt = Carbon::now('Asia/Ho_Chi_Minh');
+                    $dt = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();                
+                    
+                    $ngaybd=date('Y-m-d', strtotime($result->NgayBD));
+                    $ngaykt=date('Y-m-d', strtotime($result->NgayKT));
                    
-                    //dd($dt->toDateTimeString()>=$result->NgayBD && $dt->toDateTimeString()<=$result->NgayKT);
+                    //dd($dt >= $ngaybd && $dt <= $ngaykt ,$dt,$result->NgayBD);
 					if($result->SLT >= $qty) {                       
 						$orderDetail			= 	new tbl_chitietdonhang;
 		                $orderDetail->idDonHang	=   $order->id;
 		                $orderDetail->idSanPham =   $result->id;		                
                         $orderDetail->soLuong	= 	$qty;
                         $orderDetail->donGia    =   $result->gia;
-                        if($dt->toDateTimeString()>=$result->NgayBD && $dt->toDateTimeString()<=$result->NgayKT) {                            
+                        if($dt>=$ngaybd && $dt<=$ngaykt) {                            
                             $orderDetail->chietKhau =   (int)$result->chietKhau;  
                             $orderDetail->thanhTien =   ($result->gia* $qty)-((($result->gia*$qty)*(int)$result->chietKhau)/100);                        } 
                         else{
@@ -68,7 +71,7 @@ class OderController extends Controller
                         $orderDetail->soLuong	= 	(int)$result->SLT;
                         $orderDetail->donGia    =   (int)$result->gia;	
                         	
-                        if($dt->toDateTimeString()>=$result->NgayBD && $dt->toDateTimeString()<=$result->NgayKT) { 
+                        if($dt>=$ngaybd && $dt<=$ngaykt) { 
                             $orderDetail->chietKhau =   (int)$result->chietKhau;                          
                             $orderDetail->thanhTien =   (int)($result->gia* $result->SLT)-((($result->gia*$result->SLT)*(int)$result->chietKhau)/100);	
                         } 
