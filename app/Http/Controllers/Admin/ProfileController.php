@@ -4,47 +4,39 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use DB;
 
 class ProfileController extends Controller
 {
     public function fetchExportOrder(Request $request){
     	
-    	// $query = '
-    	// SELECT 
-    	// 	hoa_don_xuats.* 
-		// ,	chi_tiet_hoa_don_xuats."idSanPham"
-		// ,	chi_tiet_hoa_don_xuats."DonGia"
-		// ,	chi_tiet_hoa_don_xuats."SoLuong"
-		// ,	san_pham_ban_muas."TenSanPham"
-		// ,	san_pham_ban_muas."Hinh"
-		// ,	trang_thais."Ten" AS "StatusName"
-		// ,	p."Ten" as "PHUONG"
-		// ,	q."Ten" as "QUAN"
-		// ,	tp."Ten" as "THANHPHO"
-		// ,	temp."Total"
-    	// FROM hoa_don_xuats
-    	// LEFT JOIN chi_tiet_hoa_don_xuats 
-    	// ON chi_tiet_hoa_don_xuats."idHDX" = hoa_don_xuats."id"
-    	// LEFT JOIN san_pham_ban_muas
-    	// ON san_pham_ban_muas."id" = chi_tiet_hoa_don_xuats."idSanPham"
-    	// LEFT JOIN dia_diems p
-    	// ON p."id" = hoa_don_xuats."idDiaDiem"
-    	// LEFT JOIN dia_diems q 
-    	// ON q."id" = p."idParent"
-    	// LEFT JOIN dia_diems tp 
-    	// ON tp."id" = q."idParent"
-    	// LEFT JOIN trang_thais
-    	// ON trang_thais."id" = hoa_don_xuats."idTrangThai"
-    	// LEFT JOIN(
-		// 	SELECT chi_tiet_hoa_don_xuats."idHDX", SUM(chi_tiet_hoa_don_xuats."SoLuong" * chi_tiet_hoa_don_xuats."DonGia") AS "Total"
-		// 	FROM chi_tiet_hoa_don_xuats
-		// 	GROUP BY chi_tiet_hoa_don_xuats."idHDX"
-    	// ) temp 
-    	// ON temp."idHDX" = hoa_don_xuats."id"
-    	// WHERE hoa_don_xuats."idUser" = '.$request->idUser
-   		// ;
-    	// $result = DB::select($query);
-        // return response()->json($result,200);
-           return response()->json(200);
+    	$query = '
+    	SELECT 
+    		tbl_donhangs.* 
+		,	tbl_chitietdonhangs."idSanPham"
+		,	tbl_chitietdonhangs."donGia"
+		,	tbl_chitietdonhangs."soLuong"
+		,	tbl_sanphams."tenSanpham"
+		,	tbl_sanphams."hinhAnh"
+		,	tbl_trangthais."tenTrangthai" AS "StatusName"		
+		,	temp."Total"
+    	FROM tbl_donhangs
+    	LEFT JOIN tbl_chitietdonhangs 
+    	ON tbl_chitietdonhangs."idDonHang" = tbl_donhangs."id"
+    	LEFT JOIN tbl_sanphams
+    	ON tbl_sanphams."id" = tbl_chitietdonhangs."idSanPham"    	
+    	LEFT JOIN tbl_trangthais
+    	ON tbl_trangthais."id" = tbl_donhangs."idTrangthai"
+    	LEFT JOIN(
+			SELECT tbl_chitietdonhangs."idDonHang", SUM(tbl_chitietdonhangs."soLuong" * tbl_chitietdonhangs."donGia") AS "Total"
+			FROM tbl_chitietdonhangs
+			GROUP BY tbl_chitietdonhangs."idDonHang"
+    	) temp 
+    	ON temp."idDonHang" = tbl_donhangs."id"
+    	WHERE tbl_donhangs."idTaiKhoan" = '.$request->idUser
+   		;
+    	$result = DB::select($query);
+        return response()->json($result,200);
+        // return response()->json(200);
     }
 }

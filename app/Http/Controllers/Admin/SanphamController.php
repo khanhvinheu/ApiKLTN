@@ -32,7 +32,7 @@ class SanphamController extends Controller
             LEFT JOIN tbl_danhgias
             ON tbl_sanphams."id" = tbl_danhgias."idSanPham"  
             LEFT JOIN tbl_chitietkhuyenmais
-            ON tbl_sanphams."idKhuyenmai" = tbl_chitietkhuyenmais."id" 
+            ON tbl_sanphams."idKhuyenmai" = tbl_chitietkhuyenmais."id"            
             LEFT JOIN tbl_khuyenmais
             ON tbl_khuyenmais."id" = tbl_chitietkhuyenmais."idKhuyenMai"
             GROUP BY (tbl_sanphams.id,tbl_danhmucs."tenDanhmuc",

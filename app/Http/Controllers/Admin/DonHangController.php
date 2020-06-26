@@ -12,20 +12,24 @@ use DB;
 class DonHangController extends Controller
 {
     public function index()
-    {
+    {        
         $query = "
         SELECT tbl_donhangs.*  
         ,   tbl_taikhoans.\"hoTen\" AS \"UserName\"
-        ,   SUM(tbl_chitietdonhangs.\"soLuong\" * tbl_chitietdonhangs.\"donGia\") AS \"total\"        
+        ,   SUM(tbl_chitietdonhangs.\"soLuong\" * tbl_chitietdonhangs.\"donGia\") AS \"total\"  
+        ,   tbl_phuongthucthanhtoans.\"tenPhuongthuc\"
         FROM tbl_donhangs
         LEFT JOIN tbl_taikhoans
         ON tbl_taikhoans.\"id\" = tbl_donhangs.\"idTaiKhoan\"
         LEFT JOIN tbl_chitietdonhangs
-        ON tbl_chitietdonhangs.\"idDonHang\" = tbl_donhangs.\"id\"       
+        ON tbl_chitietdonhangs.\"idDonHang\" = tbl_donhangs.\"id\" 
+        LEFT JOIN tbl_phuongthucthanhtoans
+        ON tbl_phuongthucthanhtoans.\"id\"=tbl_donhangs.\"idPhuongthucTT\"
         
        
         GROUP BY tbl_donhangs.\"id\"         
-        ,   tbl_taikhoans.\"hoTen\"       
+        ,   tbl_taikhoans.\"hoTen\" 
+        ,   tbl_phuongthucthanhtoans.\"tenPhuongthuc\"  
         ";
         $items = DB::select($query);
         $result = array(
@@ -121,6 +125,7 @@ class DonHangController extends Controller
     //
     public function show($id)
     {
+        
         $query1 = "
         SELECT tbl_donhangs.*  
         ,   tbl_taikhoans.\"hoTen\" AS \"UserName\"

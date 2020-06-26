@@ -19,7 +19,8 @@ class trangthaiSeeder extends Seeder
     		['Đã đóng gói'],
     		['Đang giao hàng'],
             ['Đã giao hàng'],
-            ['Đã hủy'],
+			['Đã hủy'],
+			['Đã thanh toán'],
     	];
 
     	foreach ($trangthai as $item) {

@@ -10,10 +10,11 @@ use App\tbl_khuyenmai;
 use App\tbl_chitietkhuyenmai;
 use DB;
 use Carbon\Carbon;
+use App\Notifications\SendMail;
 
 class OderController extends Controller
 {
-    public function submitOrder(Request $request){
+    public function submitOrder(Request $request){       
 		$cart = json_decode($request['cart']);
 		DB::beginTransaction();
 		try {
@@ -92,7 +93,7 @@ class OderController extends Controller
              $phiShip=$request->phiShip;
              $tongTientra=$total[0]->sum+$phiShip;
              $donhang->update(['tongTien'=>$total[0]->sum,'phiShip'=>$phiShip,'tongtientra'=>$tongTientra]); 
-			 DB::commit();
+             DB::commit();  
              return response()->json(['order'=>$order,'total' => $total,'ERROR'=>false],200);
            
         } catch (Exception $e) {
