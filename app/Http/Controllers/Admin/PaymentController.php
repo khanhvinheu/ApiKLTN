@@ -18,7 +18,7 @@ class PaymentController extends Controller
         $vnp_Url = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         //$vnp_Returnurl = "http://localhost:8000/api/admin/return-vnpay";
         //$vnp_Returnurl = "http://localhost:4200/return-pament";
-        $vnp_Returnurl = "https://quiet-reef-07659.herokuapp.com/api/admin/return-vnpay";
+        $vnp_Returnurl = "https://chohailua-b67fe.web.app/return-pament";
         $vnp_TxnRef = date("YmdHis"); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_OrderInfo = "Thanh toán hóa đơn phí dich vụ";
         $vnp_OrderType = 'billpayment';
