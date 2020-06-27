@@ -20,21 +20,50 @@ class HomePageController extends Controller
      */
     public function index()
     {
+        // $query = '
+        // SELECT 
+        // tbl_sanphams.* , tbl_danhmucs."tenDanhmuc" , 
+        // tbl_nhacungcaps."tenNhacungcap" ,
+        // tbl_nhacungcaps."diaChi" ,
+        // AVG(tbl_danhgias."Diem") as rating         
+        // FROM tbl_sanphams   
+        // LEFT JOIN tbl_danhmucs
+        // ON tbl_sanphams."idDanhMuc" = tbl_danhmucs."id"     
+        // LEFT JOIN tbl_nhacungcaps
+        // ON tbl_sanphams."idNhacungcap" = tbl_nhacungcaps."id"  
+        // LEFT JOIN tbl_danhgias
+        // ON tbl_sanphams."id" = tbl_danhgias."idSanPham"    
+        // GROUP BY (tbl_sanphams.id,tbl_danhmucs."tenDanhmuc",tbl_nhacungcaps."tenNhacungcap" ,tbl_nhacungcaps."diaChi" )   
+        // ';
         $query = '
-        SELECT 
-        tbl_sanphams.* , tbl_danhmucs."tenDanhmuc" , 
-        tbl_nhacungcaps."tenNhacungcap" ,
-        tbl_nhacungcaps."diaChi" ,
-        AVG(tbl_danhgias."Diem") as rating         
-        FROM tbl_sanphams   
-        LEFT JOIN tbl_danhmucs
-        ON tbl_sanphams."idDanhMuc" = tbl_danhmucs."id"     
-        LEFT JOIN tbl_nhacungcaps
-        ON tbl_sanphams."idNhacungcap" = tbl_nhacungcaps."id"  
-        LEFT JOIN tbl_danhgias
-        ON tbl_sanphams."id" = tbl_danhgias."idSanPham"    
-        GROUP BY (tbl_sanphams.id,tbl_danhmucs."tenDanhmuc",tbl_nhacungcaps."tenNhacungcap" ,tbl_nhacungcaps."diaChi" )   
-        ';
+            SELECT 
+            tbl_sanphams.* , tbl_danhmucs."tenDanhmuc" , 
+            tbl_nhacungcaps."tenNhacungcap" ,
+            tbl_nhacungcaps."diaChi" ,
+            AVG(tbl_danhgias."Diem") as rating ,
+            tbl_khuyenmais."tieuDe",
+            tbl_khuyenmais."chietKhau"
+            FROM tbl_sanphams   
+            LEFT JOIN tbl_danhmucs
+            ON tbl_sanphams."idDanhMuc" = tbl_danhmucs."id"     
+            LEFT JOIN tbl_nhacungcaps
+            ON tbl_sanphams."idNhacungcap" = tbl_nhacungcaps."id"  
+            LEFT JOIN tbl_danhgias
+            ON tbl_sanphams."id" = tbl_danhgias."idSanPham"  
+            LEFT JOIN tbl_chitietkhuyenmais 
+            ON tbl_sanphams."idKhuyenmai" = tbl_chitietkhuyenmais."id" AND Date(tbl_chitietkhuyenmais."NgayBD") <= NOW()::DATE 
+            AND Date(tbl_chitietkhuyenmais."NgayKT") >= NOW()::DATE 
+            LEFT JOIN tbl_khuyenmais
+            ON tbl_khuyenmais."id" = tbl_chitietkhuyenmais."idKhuyenMai" 
+            GROUP BY (tbl_sanphams.id,tbl_danhmucs."tenDanhmuc",
+                      tbl_nhacungcaps."tenNhacungcap" ,
+                      tbl_nhacungcaps."diaChi",
+                      tbl_chitietkhuyenmais."idKhuyenMai",
+                      tbl_khuyenmais."tieuDe",
+                      tbl_khuyenmais."chietKhau"
+                      )
+                      
+            '; 
        try{
         $data= DB::select($query);
         $collection = collect($data);

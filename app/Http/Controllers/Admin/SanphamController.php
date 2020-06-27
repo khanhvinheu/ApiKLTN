@@ -5,25 +5,55 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\tbl_sanpham;
+use App\tbl_chitietkhuyenmai;
 use File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use DB;
 use Illuminate\Http\Response;
 use Image;
+use Carbon\Carbon;
+
 
 class SanphamController extends Controller
 {
     public function index()
     {
         try {
+            // $query = '
+            // SELECT 
+            // tbl_sanphams.* , tbl_danhmucs."tenDanhmuc" , 
+            // tbl_nhacungcaps."tenNhacungcap" ,
+            // tbl_nhacungcaps."diaChi" ,
+            // AVG(tbl_danhgias."Diem") as rating ,
+            // tbl_khuyenmais."tieuDe"        
+            // FROM tbl_sanphams   
+            // LEFT JOIN tbl_danhmucs
+            // ON tbl_sanphams."idDanhMuc" = tbl_danhmucs."id"     
+            // LEFT JOIN tbl_nhacungcaps
+            // ON tbl_sanphams."idNhacungcap" = tbl_nhacungcaps."id"  
+            // LEFT JOIN tbl_danhgias
+            // ON tbl_sanphams."id" = tbl_danhgias."idSanPham"  
+            // LEFT JOIN tbl_chitietkhuyenmais
+            // ON tbl_sanphams."idKhuyenmai" = tbl_chitietkhuyenmais."id"            
+            // LEFT JOIN tbl_khuyenmais
+            // ON tbl_khuyenmais."id" = tbl_chitietkhuyenmais."idKhuyenMai"
+            // GROUP BY (tbl_sanphams.id,tbl_danhmucs."tenDanhmuc",
+            //           tbl_nhacungcaps."tenNhacungcap" ,
+            //           tbl_nhacungcaps."diaChi",
+            //           tbl_chitietkhuyenmais."idKhuyenMai",
+            //           tbl_khuyenmais."tieuDe" )
+            // ';  
+            $dt = 	Carbon::now('Asia/Ho_Chi_Minh')->toDateString(); 
+            $ngaykt=date('Y-m-d ', strtotime($dt));            
             $query = '
             SELECT 
             tbl_sanphams.* , tbl_danhmucs."tenDanhmuc" , 
             tbl_nhacungcaps."tenNhacungcap" ,
             tbl_nhacungcaps."diaChi" ,
             AVG(tbl_danhgias."Diem") as rating ,
-            tbl_khuyenmais."tieuDe"        
+            tbl_khuyenmais."tieuDe",
+            tbl_khuyenmais."chietKhau"
             FROM tbl_sanphams   
             LEFT JOIN tbl_danhmucs
             ON tbl_sanphams."idDanhMuc" = tbl_danhmucs."id"     
@@ -31,17 +61,22 @@ class SanphamController extends Controller
             ON tbl_sanphams."idNhacungcap" = tbl_nhacungcaps."id"  
             LEFT JOIN tbl_danhgias
             ON tbl_sanphams."id" = tbl_danhgias."idSanPham"  
-            LEFT JOIN tbl_chitietkhuyenmais
-            ON tbl_sanphams."idKhuyenmai" = tbl_chitietkhuyenmais."id"            
+            LEFT JOIN tbl_chitietkhuyenmais 
+            ON tbl_sanphams."idKhuyenmai" = tbl_chitietkhuyenmais."id" AND Date(tbl_chitietkhuyenmais."NgayBD") <= NOW()::DATE 
+            AND Date(tbl_chitietkhuyenmais."NgayKT") >= NOW()::DATE 
             LEFT JOIN tbl_khuyenmais
-            ON tbl_khuyenmais."id" = tbl_chitietkhuyenmais."idKhuyenMai"
+            ON tbl_khuyenmais."id" = tbl_chitietkhuyenmais."idKhuyenMai" 
             GROUP BY (tbl_sanphams.id,tbl_danhmucs."tenDanhmuc",
                       tbl_nhacungcaps."tenNhacungcap" ,
                       tbl_nhacungcaps."diaChi",
                       tbl_chitietkhuyenmais."idKhuyenMai",
-                      tbl_khuyenmais."tieuDe" )
-            ';           
+                      tbl_khuyenmais."tieuDe",
+                      tbl_khuyenmais."chietKhau"
+                      )
+                      
+            '; 
             $data=DB::select($query);           
+            //dd($data->NgayBD < $ngaykt);            
             $result = array(
                 'status' => 'OK',
                 'message'=> 'Fetch Successfully',
