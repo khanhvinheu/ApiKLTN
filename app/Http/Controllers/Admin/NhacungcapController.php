@@ -45,7 +45,31 @@ class NhacungcapController extends Controller
     public function store(Request $request)
     {
         try {
-            $item=tbl_nhacungcap::create($request->all());
+            $name="";
+            if($request->hasFile('hinhAnh'))
+            {
+                $file=$request->file('hinhAnh');
+                $duoi=$file->getClientOriginalExtension();
+                if($duoi != 'jpg' && $duoi !='png' && $duoi != 'jpeg')
+                {
+                    return  response()->json(['content'=>'File khong dung dinh dang',"error"=>true],200);
+                }
+                $image_name=$file->getClientOriginalName();
+                $name= Str::random(4)."_".$image_name;
+                while(file_exists("upload/sanpham/".$name))
+                {
+                    $name= Str::random(4)."_".$image_name;
+                }                 
+                $file->move("upload/sanpham",$name);      
+
+            }           
+            $img = Image::make(public_path("upload/sanpham/".$name))->resize(900,900);
+            /* insert watermark at bottom-right corner with 10px offset */
+            $img->insert(public_path('upload/other/logowt.png'), 'bottom-right', 15, 15,'width:20px');
+            // $img->save(public_path("upload/other/wwabc.png"));
+            $img->save(public_path("upload/sanpham/".$name));
+            //$item=tbl_nhacungcap::create($request->all());
+            $item=tbl_nhacungcap::create($request->only('tenNhacungcap','diaChi','soDienthoai','email','trangThai','idTaiKhoan')+['hinhAnh'=>$name]);
             $data_find = tbl_nhacungcap::find($item['id']);
             $result = array(
                 'status' => 'OK',

@@ -35,6 +35,7 @@ class LoginController extends Controller
             $user->hoTen=$request->hoTen;
             $user->email = $request->email;
             $user->diaChi =$request->diaChi;
+            $user->dienThoai=$request->dienThoai;
             $user->password = Hash::make($request->password);
             $user->save(); 
         } catch (Exception $e) {
