@@ -8,6 +8,7 @@ use App\tbl_donhang;
 use App\tbl_chitietdonhang;
 use App\tbl_khuyenmai;
 use App\tbl_chitietkhuyenmai;
+use App\tbl_sanpham;
 use DB;
 use Carbon\Carbon;
 use App\Notifications\SendMail;
@@ -63,7 +64,10 @@ class OderController extends Controller
                             $orderDetail->thanhTien =   ($result->gia* $qty);
                         }                 
                         	              
-                        $orderDetail->save();                            
+                        $orderDetail->save();  
+                        
+                        $product = tbl_sanpham::find($result->id);
+                        $product -> update(['soLuong'=>$result->SLT-$qty]);                       
 
 					}else{
 						$orderDetail			= 	new tbl_chitietdonhang;
@@ -82,6 +86,8 @@ class OderController extends Controller
                         } 
                                   
                         $orderDetail->save();
+                        $product = tbl_sanpham::find($result->id);
+                        $product -> update(['soLuong'=>$result->SLT-$qty]); 
                         $qty = 0;
 					}
 					 $qty -= (int)$result->SLT;

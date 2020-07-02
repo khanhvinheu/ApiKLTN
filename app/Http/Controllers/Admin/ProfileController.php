@@ -16,6 +16,8 @@ class ProfileController extends Controller
 		,	tbl_chitietdonhangs."idSanPham"
 		,	tbl_chitietdonhangs."donGia"
 		,	tbl_chitietdonhangs."soLuong"
+		,	tbl_chitietdonhangs."chietKhau"
+		,	tbl_chitietdonhangs."thanhTien"
 		,	tbl_sanphams."tenSanpham"
 		,	tbl_sanphams."hinhAnh"
 		,	tbl_trangthais."tenTrangthai" AS "StatusName"		

@@ -207,8 +207,19 @@ class ProductDetailController extends Controller
         // ';
         //
         $query='
-        SELECT *
-        FROM tbl_sanphams     
+        SELECT tbl_sanphams.*,
+               tbl_nhacungcaps."tenNhacungcap",
+               tbl_nhacungcaps."diaChi",
+               tbl_khuyenmais."tieuDe",
+               tbl_khuyenmais."chietKhau"
+        FROM tbl_sanphams  
+        LEFT JOIN tbl_nhacungcaps
+        ON tbl_sanphams."idNhacungcap" = tbl_nhacungcaps."id"  
+        LEFT JOIN tbl_chitietkhuyenmais 
+        ON tbl_sanphams."idKhuyenmai" = tbl_chitietkhuyenmais."id" AND Date(tbl_chitietkhuyenmais."NgayBD") <= NOW()::DATE 
+        AND Date(tbl_chitietkhuyenmais."NgayKT") >= NOW()::DATE 
+        LEFT JOIN tbl_khuyenmais
+        ON tbl_khuyenmais."id" = tbl_chitietkhuyenmais."idKhuyenMai" 
         WHERE tbl_sanphams."id"='.$id.'';
         
         $query2='
