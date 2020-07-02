@@ -38,11 +38,12 @@ class HomePageController extends Controller
         $query = '
             SELECT 
             tbl_sanphams.* , tbl_danhmucs."tenDanhmuc" , 
-            tbl_nhacungcaps."tenNhacungcap" ,
-            tbl_nhacungcaps."diaChi" ,
-            AVG(tbl_danhgias."Diem") as rating ,
-            tbl_khuyenmais."tieuDe",
-            tbl_khuyenmais."chietKhau"
+                             tbl_nhacungcaps."tenNhacungcap" ,
+                             tbl_nhacungcaps."diaChi" ,
+                             AVG(tbl_danhgias."Diem") as rating ,
+                             tbl_khuyenmais."tieuDe",
+                             tbl_khuyenmais."chietKhau",
+                             tbl_nhacungcaps."trangThai" as status
             FROM tbl_sanphams   
             LEFT JOIN tbl_danhmucs
             ON tbl_sanphams."idDanhMuc" = tbl_danhmucs."id"     
@@ -55,12 +56,14 @@ class HomePageController extends Controller
             AND Date(tbl_chitietkhuyenmais."NgayKT") >= NOW()::DATE 
             LEFT JOIN tbl_khuyenmais
             ON tbl_khuyenmais."id" = tbl_chitietkhuyenmais."idKhuyenMai" 
+            WHERE tbl_nhacungcaps."trangThai"=1
             GROUP BY (tbl_sanphams.id,tbl_danhmucs."tenDanhmuc",
                       tbl_nhacungcaps."tenNhacungcap" ,
                       tbl_nhacungcaps."diaChi",
                       tbl_chitietkhuyenmais."idKhuyenMai",
                       tbl_khuyenmais."tieuDe",
-                      tbl_khuyenmais."chietKhau"
+                      tbl_khuyenmais."chietKhau",
+                      tbl_nhacungcaps."trangThai"
                       )
                       
             '; 
