@@ -62,7 +62,7 @@ class DanhMucController extends Controller
     public function show($id)
     {
         $query = '
-        SELECT tbl_danhmucs.*, PARENT."tenDanhmucDanhmuc" as "NameParent"
+        SELECT tbl_danhmucs.*, PARENT."tenDanhmuc" as "NameParent"
         FROM tbl_danhmucs
         LEFT JOIN tbl_danhmucs PARENT
         ON PARENT."id" = tbl_danhmucs."danhMuccha"
@@ -80,7 +80,7 @@ class DanhMucController extends Controller
     {
         try {
             $item=tbl_danhmuc::find($id);
-            $item->update($request->only('tenDanhmucDanhmuc','Hinh','danhMuccha'));
+            $item->update($request->only('tenDanhmuc','hinh','danhMuccha'));
             $query = '
             SELECT tbl_danhmucs.*, PARENT."tenDanhmuc" as "NameParent"
             FROM tbl_danhmucs
