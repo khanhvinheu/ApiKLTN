@@ -166,9 +166,9 @@ class NhacungcapController extends Controller
         try {
               $data_find=tbl_nhacungcap::find($id);     
                 //dd($request->only('trangThai')['trangThai']==7);
-                    if($request->only('trangThai')['trangThai']==7){
-                    $data_find->lockNccNotification();
-                    }
+                    // if($request->only('trangThai')['trangThai']==7){
+                    // $data_find->lockNccNotification();
+                    // }
                $data_find->update($request->only('trangThai'));
                $idtk=$data_find['idTaiKhoan'];
                $taikhoan=tbl_taikhoan::find($idtk);
