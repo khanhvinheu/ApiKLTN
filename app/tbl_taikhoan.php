@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\ResetPasswordRequest;
+use App\Notifications\LockNcc;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class tbl_taikhoan extends Authenticatable implements MustVerifyEmail, JWTSubject 
@@ -40,6 +41,10 @@ class tbl_taikhoan extends Authenticatable implements MustVerifyEmail, JWTSubjec
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordRequest($token));
+    }
+    public function lockNccNotification()
+    {
+        $this->notify(new LockNcc());
     }
     //
     // public function quyen()

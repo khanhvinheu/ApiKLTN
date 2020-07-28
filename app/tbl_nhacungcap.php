@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use App\Notifications\LockNcc;
 
-class tbl_nhacungcap extends Model
+class tbl_nhacungcap extends Model 
 {
+	use Notifiable;
     protected $guarded = [];
 	public function taikhoan()
 	{
@@ -15,4 +18,10 @@ class tbl_nhacungcap extends Model
 	{
 		return $this->belongsTo('App\tbl_taikhoan','trangThai','id');
 	}
+	public function lockNccNotification()
+    {
+		//dd('dsada');
+        $this->notify(new LockNcc());
+	}
+	
 }

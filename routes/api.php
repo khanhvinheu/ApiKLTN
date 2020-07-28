@@ -75,7 +75,9 @@ Route::prefix('user')->namespace('API')->group(function () {
     Route::post('donhang-refer-detail', 'ChiTietDonHangController@referDetail');
     Route::post('donhang-filter','DonHangController@filterByIdTrangThai');
     Route::resource('donhang', 'DonHangController');
-
+    //Nhasanxuat
+    Route::resource('nhasanxuat', 'NhaSanXuatController');
+    //Thongkedoanhthu
     Route::post('doanhthutheothang','BaoCaoController@getDoanhThuTheoThang');
     Route::post('baocao_topsanpham','BaoCaoController@baocao_topsanpham');
     Route::resource('chitiethoadonxuat', 'ChiTietDonHangController');
@@ -83,8 +85,7 @@ Route::prefix('user')->namespace('API')->group(function () {
     Route::post('baocao_giatridonhang','BaoCaoController@baocao_giatridonhang');
     //Thanhtoan
     Route::post('thanhtoan','PaymentController@create');
-    Route::get('return-vnpay','PaymentController@return');
-    
+    Route::get('return-vnpay','PaymentController@return');   
 
     //Taikhoan
     Route::post('/signup', 'AuthController@register'); 

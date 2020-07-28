@@ -26,8 +26,8 @@ class CreateTblDonhangs extends Migration
             //$table->bigInteger('idDiaDiem')->nullable();
             //
             //$table->string('diaChinhanhang')->nullable();
-            $table->bigInteger('idTaiKhoan')->unsigned();
-            $table->foreign('idTaiKhoan')->references('id')->on('tbl_taikhoans')->onDelete('cascade');
+            $table->bigInteger('idTaiKhoan')->unsigned()->nullable();
+            //$table->foreign('idTaiKhoan')->references('id')->on('tbl_taikhoans')->onDelete('cascade');
             $table->bigInteger('idPhuongthucTT')->unsigned();
             $table->foreign('idPhuongthucTT')->references('id')->on('tbl_phuongthucthanhtoans')->onDelete('cascade');
             $table->datetime('ngayDat');

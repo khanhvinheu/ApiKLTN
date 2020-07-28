@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use App\tbl_taikhoan;
 use App\PasswordReset;
-use App\Notifications\ResetPasswordRequest;
+//use App\Notifications\ResetPasswordRequest;
 use Illuminate\Support\Facades\Auth;
 use Hash;
 class ResetPasswordController extends Controller
@@ -33,7 +33,7 @@ class ResetPasswordController extends Controller
 				]);
 		}
 		if ($passwordReset) {
-				$user->sendPasswordResetNotification($passwordReset->token);
+				$user->sendPasswordResetNotification($passwordReset->token);				
 			}			
 		return response()->json(['error'=>false],200);
 				
