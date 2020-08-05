@@ -76,7 +76,7 @@ Route::prefix('user')->namespace('API')->group(function () {
     Route::post('donhang-filter','DonHangController@filterByIdTrangThai');
     Route::resource('donhang', 'DonHangController');
     //Nhasanxuat
-    Route::resource('nhasanxuat', 'NhaSanXuatController');
+    Route::resource('nhasanxuat', 'NhasanxuatController');
     //Thongkedoanhthu
     Route::post('doanhthutheothang','BaoCaoController@getDoanhThuTheoThang');
     Route::post('baocao_topsanpham','BaoCaoController@baocao_topsanpham');
