@@ -19,7 +19,7 @@ class NhasanxuatController extends Controller
         );
         return response()->json($result,Response::HTTP_OK,[],JSON_NUMERIC_CHECK);
     }
-    //
+    // insertncc
     public function store(Request $request)
     {
         try {
