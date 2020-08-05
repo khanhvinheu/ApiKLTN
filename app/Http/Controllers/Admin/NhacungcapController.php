@@ -165,22 +165,24 @@ class NhacungcapController extends Controller
     public function changeQuyenncc(Request $request,$id){      
         try {
               $data_find=tbl_nhacungcap::find($id);     
-                //dd($request->only('trangThai')['trangThai']==7);
-                    // if($request->only('trangThai')['trangThai']==7){
-                    // $data_find->lockNccNotification();
-                    // }
+                
                $data_find->update($request->only('trangThai'));
                $idtk=$data_find['idTaiKhoan'];
                $taikhoan=tbl_taikhoan::find($idtk);
                $trangThaitk=$request->only('trangThaitk')['trangThaitk'];
                $quyen=$request->only('idQuyen')['idQuyen'];
-               $taikhoan->update(['trangThai'=>$trangThaitk,'idQuyen'=>$quyen]);        
+               $taikhoan->update(['trangThai'=>$trangThaitk,'idQuyen'=>$quyen]);     
+                
             $result = array(
                 'status' => 'OK',
                 'message'=> 'Update Successfully',
                 'data'=> $data_find
-            );
+            );           
             return response()->json($result,Response::HTTP_OK,[],JSON_NUMERIC_CHECK);
+             //dd($request->only('trangThai')['trangThai']==7);
+                    // if($request->only('trangThai')['trangThai']==7){
+                    // $data_find->lockNccNotification();
+            // }  
         } catch (Exception $e) {
             $result = array(
                 'status' => 'ER',
