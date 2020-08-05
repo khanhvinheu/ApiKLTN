@@ -172,17 +172,17 @@ class NhacungcapController extends Controller
                $trangThaitk=$request->only('trangThaitk')['trangThaitk'];
                $quyen=$request->only('idQuyen')['idQuyen'];
                $taikhoan->update(['trangThai'=>$trangThaitk,'idQuyen'=>$quyen]);     
-                
-            $result = array(
-                'status' => 'OK',
-                'message'=> 'Update Successfully',
-                'data'=> $data_find
-            );           
+               $result = array(
+                   'status' => 'OK',
+                   'message'=> 'Update Successfully',
+                   'data'=> $data_find
+                );           
+                // if($request->only('trangThai')['trangThai']==7){
+                //      $data_find->lockNccNotification();
+                // }   
             return response()->json($result,Response::HTTP_OK,[],JSON_NUMERIC_CHECK);
              //dd($request->only('trangThai')['trangThai']==7);
-                    // if($request->only('trangThai')['trangThai']==7){
-                    // $data_find->lockNccNotification();
-            // }  
+                   
         } catch (Exception $e) {
             $result = array(
                 'status' => 'ER',

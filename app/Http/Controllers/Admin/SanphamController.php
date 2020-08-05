@@ -54,7 +54,8 @@ class SanphamController extends Controller
                              AVG(tbl_danhgias."Diem") as rating ,
                              tbl_khuyenmais."tieuDe",
                              tbl_khuyenmais."chietKhau",
-                             tbl_nhacungcaps."trangThai" as status
+                             tbl_nhacungcaps."trangThai" as status,
+                             tbl_nhasanxuats."id" as idNSX
             FROM tbl_sanphams             
             LEFT JOIN tbl_danhmucs
             ON tbl_sanphams."idDanhMuc" = tbl_danhmucs."id"     
@@ -67,6 +68,8 @@ class SanphamController extends Controller
             AND Date(tbl_chitietkhuyenmais."NgayKT") >= NOW()::DATE 
             LEFT JOIN tbl_khuyenmais
             ON tbl_khuyenmais."id" = tbl_chitietkhuyenmais."idKhuyenMai"  
+            LEFT JOIN tbl_nhasanxuats
+            ON tbl_sanphams."idNSX" = tbl_nhasanxuats."id"
             WHERE tbl_nhacungcaps."trangThai"=1            
             GROUP BY (tbl_sanphams.id,tbl_danhmucs."tenDanhmuc",
                       tbl_nhacungcaps."tenNhacungcap" ,
@@ -74,7 +77,8 @@ class SanphamController extends Controller
                       tbl_chitietkhuyenmais."idKhuyenMai",
                       tbl_khuyenmais."tieuDe",
                       tbl_khuyenmais."chietKhau",
-                      tbl_nhacungcaps."trangThai"
+                      tbl_nhacungcaps."trangThai",
+                      tbl_nhasanxuats."id"
                       )
                       
             '; 
@@ -124,7 +128,7 @@ class SanphamController extends Controller
             // $img->save(public_path("upload/other/wwabc.png"));
             $img->save(public_path("upload/sanpham/".$name));
 
-            $sanpham=tbl_sanpham::create($request->only('tenSanpham','gia','soLuong','moTa','thongTin','idNhacungcap','idDanhMuc','idKhuyenmai')+['hinhAnh'=>$name]);            
+            $sanpham=tbl_sanpham::create($request->only('tenSanpham','gia','soLuong','moTa','thongTin','idNhacungcap','idDanhMuc','idKhuyenmai','idNSX')+['hinhAnh'=>$name]);            
             $result = array(
                 'status' => 'OK',
                 'message'=> 'Insert Successfully',

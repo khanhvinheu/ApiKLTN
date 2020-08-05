@@ -25,6 +25,8 @@ class CreateTblSanphams extends Migration
             $table->foreign('idNhacungcap')->references('id')->on('tbl_nhacungcaps')->onDelete('cascade');
             $table->bigInteger('idDanhMuc')->unsigned();
             $table->foreign('idDanhMuc')->references('id')->on('tbl_danhmucs');
+            $table->bigInteger('idNSX')->nullable();
+            $table->foreign('idNSX')->references('id')->on('tbl_nhasanxuats')->onDelete('cascade');
             // ->onDelete('cascade');
             $table->bigInteger('idKhuyenmai')->unsigned()->nullable();
             // $table->foreign('idKhuyenmai')->references('id')->on('tbl_chitietkhuyenmais');
