@@ -15,9 +15,11 @@ class nhaCungcapSeeder extends Seeder
 		DB::table('tbl_nhacungcaps')->truncate();
 
 		$users = array(
-            array('id' => '1','tenNhacungcap' => 'nhacungcap1','diaChi' => 'bui tan dien','soDienthoai' => '090510101010','email' => 'ncc@gmail.com','thongTin' => NULL,'moTa' => 'mota','hinhAnh' => '7VRD_tải xuống.jpg','trangThai' => '1','idTaiKhoan' => '2'),
-            array('id' => '2','tenNhacungcap' => 'nhacungcap2','diaChi' => 'bui tan dien','soDienthoai' => '090510101010','email' => 'ncc2@gmail.com','thongTin' => NULL,'moTa' => 'mota','hinhAnh' => '7VRD_tải xuống.jpg','trangThai' => '1','idTaiKhoan' => '3'),
-			
+            array('id' => '1','tenNhacungcap' => 'NCC Nguyễn Kim','diaChi' => 'bui tan dien','soDienthoai' => '090510101010','email' => 'ncc1@gmail.com','thongTin' => NULL,'moTa' => 'mota','hinhAnh' => 'nk.png','trangThai' => '1','idTaiKhoan' => '2'),
+            array('id' => '2','tenNhacungcap' => 'NCC KV Store','diaChi' => 'bui tan dien','soDienthoai' => '090510101010','email' => 'ncc2@gmail.com','thongTin' => NULL,'moTa' => 'mota','hinhAnh' => 'kv.png','trangThai' => '1','idTaiKhoan' => '3'),
+            array('id' => '1','tenNhacungcap' => 'NCC DM Store','diaChi' => 'bui tan dien','soDienthoai' => '090510101010','email' => 'ncc3@gmail.com','thongTin' => NULL,'moTa' => 'mota','hinhAnh' => 'dm.jpg','trangThai' => '1','idTaiKhoan' => '4'),
+            array('id' => '2','tenNhacungcap' => 'NCC Hưng Nhân','diaChi' => 'bui tan dien','soDienthoai' => '090510101010','email' => 'ncc4@gmail.com','thongTin' => NULL,'moTa' => 'mota','hinhAnh' => 'hn.jpg','trangThai' => '1','idTaiKhoan' => '5'),
+		
 
 		);
 		foreach ($users as $item) {
