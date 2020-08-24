@@ -176,10 +176,12 @@ class NhacungcapController extends Controller
                    'status' => 'OK',
                    'message'=> 'Update Successfully',
                    'data'=> $data_find
-                );           
-                // if($request->only('trangThai')['trangThai']==7){
-                //      $data_find->lockNccNotification();
-                // }   
+                );     
+                
+                //sent notification
+                if($request->only('trangThai')['trangThai']==7){
+                     $data_find->lockNccNotification();
+                }   
             return response()->json($result,Response::HTTP_OK,[],JSON_NUMERIC_CHECK);
              //dd($request->only('trangThai')['trangThai']==7);
                    

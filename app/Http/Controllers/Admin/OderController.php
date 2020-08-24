@@ -11,7 +11,7 @@ use App\tbl_chitietkhuyenmai;
 use App\tbl_sanpham;
 use DB;
 use Carbon\Carbon;
-use App\Notifications\SendMail;
+// use App\Notifications\SendMail;
 
 class OderController extends Controller
 {
@@ -99,6 +99,7 @@ class OderController extends Controller
              $phiShip=$request->phiShip;
              $tongTientra=$total[0]->sum+$phiShip;
              $donhang->update(['tongTien'=>$total[0]->sum,'phiShip'=>$phiShip,'tongtientra'=>$tongTientra]); 
+             $donhang->Xacnhandonhang();
              DB::commit();  
              return response()->json(['order'=>$order,'total' => $total,'ERROR'=>false],200);
            

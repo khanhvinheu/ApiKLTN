@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-use App\Notifications\LockNcc;
+use App\Notifications\SendMail;
 
 class tbl_nhacungcap extends Model 
 {
@@ -21,7 +21,7 @@ class tbl_nhacungcap extends Model
 	public function lockNccNotification()
     {
 		//dd('dsada');
-        $this->notify(new LockNcc());
+        $this->notify(new SendMail());
 	}
 	
 }

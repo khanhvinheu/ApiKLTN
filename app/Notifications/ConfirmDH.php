@@ -3,11 +3,11 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
-class SendMail extends Notification implements ShouldQueue
+class ConfirmDH extends Notification
 {
     use Queueable;
 
@@ -41,10 +41,9 @@ class SendMail extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    
-                    ->line('Xin chào! Vì bạn đã vi phạm một số nội quy của chúng tôi! Nên tạm thời bạn bị tước quyền nhà cung cấp.')
-                    ->line('Hãy liên hệ với chúng tôi để được hỗ trợ và làm rõ!')
-                    ->action('Hotline: 0868350979', url('/'));
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
+                    ->line('Thank you for using our application!');
     }
 
     /**
